@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>God Smite - Birds and Bears</title>
+    <link rel="stylesheet" href="css/game.css">
+    <style>
+        #instructions {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+            z-index: 100;
+            pointer-events: none;
+            transition: opacity 1s;
+        }
+        
+        #instructions ul {
+            text-align: left;
+            padding-left: 20px;
+            margin: 5px 0;
+        }
+        
+        #upgradeMessage {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #ffcc00;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px 30px;
+            border-radius: 10px;
+            border: 3px solid #ff9900;
+            font-family: Arial, sans-serif;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            z-index: 200;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s;
+            text-shadow: 0 0 10px #ff9900;
+        }
+        
+        #waveDisplay {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            z-index: 100;
+        }
+        
+        #waveDisplay span {
+            color: #ffcc00;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="instructions">
+        <h3>Game Controls:</h3>
+        <ul>
+            <li>Move your cursor to aim</li>
+            <li>Click to fire at targets</li>
+        </ul>
+    </div>
+    
+    <div id="upgradeMessage">POWERED UP!</div>
+    
+    <div id="waveDisplay">WAVE: <span id="waveNumber">1</span></div>
+    
+    <canvas id="gameCanvas"></canvas>
+    <script src="js/game.js"></script>
+    <script>
+        // Hide instructions after 5 seconds
+        setTimeout(() => {
+            document.getElementById('instructions').style.opacity = 0;
+        }, 5000);
+        
+        // Update the wave display when level changes
+        document.addEventListener('DOMContentLoaded', function() {
+            setInterval(() => {
+                // This assumes the upgradeSystem is accessible globally
+                if (window.upgradeSystem) {
+                    document.getElementById('waveNumber').textContent = window.upgradeSystem.level;
+                }
+            }, 1000); // Check every second
+        });
+    </script>
+</body>
+</html> 
